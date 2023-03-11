@@ -6,7 +6,7 @@ const refs = {
     form : document.querySelector('.feedback-form'),
 };
 const STORAGE_KEY = 'feedback-form-state';
-const formData = {};
+let formData = {};
 
 refs.form.addEventListener('input',throttle(onInputChange, 500));
 refs.form.addEventListener('submit', onFormSubmit);
@@ -43,6 +43,7 @@ function populateMessageOutput () {
  if(savedMessage){
     for (const key in parsedMessage) {
             refs.form.querySelector(`[name=${key}]`).value = parsedMessage[key];
+            formData[`${key}`] = refs.form.querySelector(`[name=${key}]`).value;
         };
   };
 }
